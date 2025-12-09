@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koszyk | Fashion Store</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="index.html">
+                        <span class="logo-text">FASHION</span>
+                        <span class="logo-dot">.</span>
+                    </a>
+                </div>
+                
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html">Strona główna</a></li>
+                        <li><a href="catalog.html">Katalog</a></li>
+                        <li><a href="catalog.html?category=women">Dla kobiet</a></li>
+                        <li><a href="catalog.html?category=men">Dla mężczyzn</a></li>
+                        <li><a href="#new">Nowości</a></li>
+                        <li><a href="#sale">Wyprzedaż</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <a href="cart.html" class="cart-btn">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                     <a href="login.html" class="cart-btn">
+                        <i class="fas fa-user"></i>
+                     <span class="cart-count">0</span>
+                     </a>
+                    <button class="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Nagłówek strony -->
+    <section class="page-header section-padding">
+        <div class="container">
+            <h1 class="page-title">Twój koszyk</h1>
+            <div class="breadcrumbs">
+                <a href="index.html">Strona główna</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Koszyk</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="cart section-padding">
+        <div class="container">
+            <div class="cart-grid">
+                <div class="cart-items">
+                    <div class="cart-header">
+                        <h3>Produkty w koszyku (<span id="cart-items-count">0</span>)</h3>
+                        <button class="clear-cart">Wyczyść koszyk</button>
+                    </div>
+                    
+                    <div class="cart-items-list" id="cart-items-container">
+                        <div class="cart-empty">
+                            <i class="fas fa-shopping-bag"></i>
+                            <h3>Twój koszyk jest pusty</h3>
+                            <p>Dodaj produkty, aby kontynuować zakupy</p>
+                            <a href="catalog.html" class="btn btn-primary">Przejdź do katalogu</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cart-summary">
+                    <h3>Podsumowanie zamówienia</h3>
+                    
+                    <div class="summary-details">
+                        <div class="summary-row">
+                            <span>Wartość produktów:</span>
+                            <span id="subtotal">0 zł</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Dostawa:</span>
+                            <span id="shipping">0 zł</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Rabat:</span>
+                            <span id="discount">0 zł</span>
+                        </div>
+                        <div class="summary-divider"></div>
+                        <div class="summary-row total">
+                            <span>Łącznie do zapłaty:</span>
+                            <span id="total">0 zł</span>
+                        </div>
+                    </div>
+                    
+                    <div class="shipping-options">
+                        <h4>Wybierz sposób dostawy:</h4>
+                        <div class="shipping-option">
+                            <input type="radio" id="pickup" name="shipping" checked>
+                            <label for="pickup">
+                                <span>Odbiór osobisty</span>
+                                <span class="shipping-price">0 zł</span>
+                            </label>
+                        </div>
+                        <div class="shipping-option">
+                            <input type="radio" id="courier" name="shipping">
+                            <label for="courier">
+                                <span>Kurier DPD</span>
+                                <span class="shipping-price">15 zł</span>
+                            </label>
+                        </div>
+                        <div class="shipping-option">
+                            <input type="radio" id="express" name="shipping">
+                            <label for="express">
+                                <span>Kurier ekspresowy (24h)</span>
+                                <span class="shipping-price">25 zł</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="promo-code">
+                        <h4>Masz kod promocyjny?</h4>
+                        <div class="promo-input">
+                            <input type="text" placeholder="Wpisz kod" id="promo-code-input">
+                            <button class="btn btn-outline" id="apply-promo">Zastosuj</button>
+                        </div>
+                    </div>
+                    
+                    <a href="checkout.html" class="btn btn-primary btn-checkout" id="checkout-btn">
+                        Przejdź do kasy
+                    </a>
+                    
+                    <div class="secure-payment">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Bezpieczne płatności • Szyfrowanie SSL</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cart-recommendations">
+                <h3>Może Ci się spodobać</h3>
+                <div class="products-grid" id="cart-recommendations">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo">
+                        <a href="index.html">
+                            <span class="logo-text">FASHION</span>
+                            <span class="logo-dot">.</span>
+                        </a>
+                    </div>
+                    <p class="footer-text">Nowoczesna odzież dla tych, którzy cenią jakość i styl.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Sklep</h3>
+                    <ul class="footer-links">
+                        <li><a href="catalog.html?category=women">Odzież damska</a></li>
+                        <li><a href="catalog.html?category=men">Odzież męska</a></li>
+                        <li><a href="catalog.html?category=shoes">Obuwie</a></li>
+                        <li><a href="catalog.html?category=accessories">Akcesoria</a></li>
+                        <li><a href="#new">Nowości</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Informacje</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">O nas</a></li>
+                        <li><a href="#">Dostawa</a></li>
+                        <li><a href="#">Płatności</a></li>
+                        <li><a href="#">Zwroty</a></li>
+                        <li><a href="#">Kontakt</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Kontakt</h3>
+                    <ul class="footer-contacts">
+                        <li><i class="fas fa-map-marker-alt"></i> Warszawa, ul. Marszałkowska 10</li>
+                        <li><i class="fas fa-phone"></i> +48 123 456 789</li>
+                        <li><i class="fas fa-envelope"></i> info@fashion-store.pl</li>
+                        <li><i class="fas fa-clock"></i> Pn-Nd: 10:00 - 22:00</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Fashion Store. Wszelkie prawa zastrzeżone.</p>
+                <div class="footer-payment">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                    <i class="fab fa-cc-stripe"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/cart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCart();
+            setupCartHandlers();
+            loadRecommendedProducts();
+        });
+        
+        function loadCart() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const container = document.getElementById('cart-items-container');
+            const itemCount = document.getElementById('cart-items-count');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="cart-empty">
+                        <i class="fas fa-shopping-bag"></i>
+                        <h3>Twój koszyk jest pusty</h3>
+                        <p>Dodaj produkty, aby kontynuować zakupy</p>
+                        <a href="catalog.html" class="btn btn-primary">Przejdź do katalogu</a>
+                    </div>
+                `;
+                itemCount.textContent = '0';
+                checkoutBtn.disabled = true;
+                checkoutBtn.classList.add('disabled');
+                calculateSummary(cart);
+                return;
+            }
+            
+            itemCount.textContent = cart.length;
+            checkoutBtn.disabled = false;
+            checkoutBtn.classList.remove('disabled');
+            
+            let html = '';
+            
+            cart.forEach((item, index) => {
+                html += `
+                    <div class="cart-item" data-index="${index}">
+                        <div class="cart-item-image">
+                            <img src="${item.image}" alt="${item.name}" loading="lazy">
+                        </div>
+                        <div class="cart-item-details">
+                            <h4 class="cart-item-name">${item.name}</h4>
+                            <div class="cart-item-options">
+                                ${item.size ? `<span>Rozmiar: ${item.size}</span>` : ''}
+                                ${item.color ? `<span>Kolor: ${item.color}</span>` : ''}
+                            </div>
+                            <div class="cart-item-price">
+                                <span class="item-total">${(item.price * item.quantity).toFixed(2)} zł</span>
+                                <span class="item-unit-price">${item.price.toFixed(2)} zł/szt.</span>
+                            </div>
+                        </div>
+                        <div class="cart-item-quantity">
+                            <button class="quantity-btn minus" data-index="${index}">-</button>
+                            <input type="number" class="quantity-input" value="${item.quantity}" min="1" max="10" data-index="${index}">
+                            <button class="quantity-btn plus" data-index="${index}">+</button>
+                        </div>
+                        <button class="cart-item-remove" data-index="${index}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+            calculateSummary(cart);
+            updateCartCounter();
+        }
+        
+        function setupCartHandlers() {
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.cart-item-remove')) {
+                    const index = e.target.closest('.cart-item-remove').getAttribute('data-index');
+                    removeFromCart(index);
+                }
+                
+                if (e.target.closest('.clear-cart')) {
+                    clearCart();
+                }
+                
+                if (e.target.closest('.quantity-btn.minus')) {
+                    const index = e.target.closest('.quantity-btn.minus').getAttribute('data-index');
+                    changeQuantity(index, -1);
+                }
+                
+                if (e.target.closest('.quantity-btn.plus')) {
+                    const index = e.target.closest('.quantity-btn.plus').getAttribute('data-index');
+                    changeQuantity(index, 1);
+                }
+                
+                if (e.target.closest('.quantity-input')) {
+                    const input = e.target.closest('.quantity-input');
+                    const index = input.getAttribute('data-index');
+                    const newQuantity = parseInt(input.value);
+                    setQuantity(index, newQuantity);
+                }
+                
+                if (e.target.closest('#apply-promo')) {
+                    applyPromoCode();
+                }
+            });
+            
+            document.querySelectorAll('input[name="shipping"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    calculateSummary();
+                });
+            });
+        }
+        
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCart();
+            showNotification('Produkt usunięty z koszyka');
+        }
+        
+        function clearCart() {
+            if (confirm('Czy na pewno chcesz wyczyścić koszyk?')) {
+                localStorage.removeItem('cart');
+                loadCart();
+                showNotification('Koszyk został wyczyszczony');
+            }
+        }
+        
+        function changeQuantity(index, delta) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart[index].quantity += delta;
+            
+            if (cart[index].quantity < 1) cart[index].quantity = 1;
+            if (cart[index].quantity > 10) cart[index].quantity = 10;
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCart();
+        }
+        
+        function setQuantity(index, quantity) {
+            if (quantity < 1) quantity = 1;
+            if (quantity > 10) quantity = 10;
+            
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart[index].quantity = quantity;
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCart();
+        }
+        
+        function applyPromoCode() {
+            const promoCode = document.getElementById('promo-code-input').value;
+            if (promoCode === 'PROMO10') {
+                calculateSummary();
+                showNotification('Kod promocyjny zastosowany! Rabat 10%');
+            } else if (promoCode) {
+                showNotification('Nieprawidłowy kod promocyjny', 'error');
+            }
+        }
+        
+        function calculateSummary() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let subtotal = 0;
+            
+            cart.forEach(item => {
+                subtotal += item.price * item.quantity;
+            });
+            
+            let shipping = 0;
+            const selectedShipping = document.querySelector('input[name="shipping"]:checked');
+            if (selectedShipping && selectedShipping.id !== 'pickup') {
+                const shippingPrice = selectedShipping.nextElementSibling.querySelector('.shipping-price').textContent;
+                shipping = parseInt(shippingPrice);
+            }
+            
+            let discount = 0;
+            const promoCode = document.getElementById('promo-code-input').value;
+            if (promoCode === 'PROMO10') {
+                discount = subtotal * 0.1;
+            }
+            
+            const total = subtotal + shipping - discount;
+            
+            document.getElementById('subtotal').textContent = subtotal.toFixed(2) + ' zł';
+            document.getElementById('shipping').textContent = shipping.toFixed(2) + ' zł';
+            document.getElementById('discount').textContent = discount.toFixed(2) + ' zł';
+            document.getElementById('total').textContent = total.toFixed(2) + ' zł';
+        }
+        
+        function loadRecommendedProducts() {
+            const recommendedProducts = [
+                {
+                    id: 13,
+                    name: "Szal jedwabny",
+                    price: 89,
+                    image: "https://images.unsplash.com/photo-1542779632-539b861ee8f9?auto=format&fit=crop&w=600&h=800&q=80"
+                },
+                {
+                    id: 14,
+                    name: "Rękawiczki skórzane",
+                    price: 79,
+                    image: "https://images.unsplash.com/photo-1549291982-5e5c6c16d43e?auto=format&fit=crop&w=600&h=800&q=80"
+                },
+                {
+                    id: 15,
+                    name: "Buty na obcasie",
+                    price: 299,
+                    old_price: 399,
+                    image: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=600&h=800&q=80"
+                },
+                {
+                    id: 16,
+                    name: "Torba laptopowa",
+                    price: 199,
+                    image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&h=800&q=80"
+                }
+            ];
+            
+            const container = document.getElementById('cart-recommendations');
+            container.innerHTML = '';
+            
+            recommendedProducts.forEach(product => {
+                const div = document.createElement('div');
+                div.className = 'product-card';
+                div.innerHTML = `
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}" loading="lazy">
+                        ${product.old_price ? '<span class="product-badge">PROMOCJA</span>' : ''}
+                        <a href="product.html?id=${product.id}" class="quick-view">Zobacz produkt</a>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">${product.name}</h3>
+                        <div class="product-price">
+                            <span class="current-price">${product.price} zł</span>
+                            ${product.old_price ? `<span class="old-price">${product.old_price} zł</span>` : ''}
+                        </div>
+                        <button class="btn btn-outline btn-add-to-cart" data-id="${product.id}">
+                            <i class="fas fa-shopping-bag"></i>
+                            Do koszyka
+                        </button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+        
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+        
+        function updateCartCounter() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            document.querySelectorAll('.cart-count').forEach(el => {
+                el.textContent = totalItems;
+            });
+        }
+    </script>
+
+    <style>
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+        }
+        
+        .notification.success {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .notification.error {
+            background: #f44336;
+            color: white;
+        }
+        
+        .notification-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .notification i {
+            font-size: 20px;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .cart-item {
+            transition: all 0.3s ease;
+        }
+        
+        .cart-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .quantity-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .quantity-btn:hover {
+            background: var(--primary-color);
+            color: var(--secondary-color);
+        }
+        
+        .cart-item-remove {
+            transition: all 0.3s ease;
+        }
+        
+        .cart-item-remove:hover {
+            color: #f44336;
+            transform: scale(1.1);
+        }
+    </style>
+</body>
+</html>

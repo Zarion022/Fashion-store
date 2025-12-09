@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moje konto | Fashion Store</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .account-container {
+            padding: 100px 0 60px;
+            min-height: 80vh;
+        }
+        
+        .account-header {
+            margin-bottom: 40px;
+        }
+        
+        .account-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .account-welcome {
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+        }
+        
+        .account-grid {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 40px;
+        }
+        
+        .account-sidebar {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+        }
+        
+        .user-info {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            background: #000;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin: 0 auto 15px;
+        }
+        
+        .user-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .user-email {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .account-nav {
+            list-style: none;
+        }
+        
+        .account-nav li {
+            margin-bottom: 10px;
+        }
+        
+        .account-nav a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            color: #333;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        .account-nav a:hover,
+        .account-nav a.active {
+            background: #000;
+            color: white;
+        }
+        
+        .account-content {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .content-section {
+            display: none;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        .section-title {
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .orders-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .order-card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .order-header {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .order-number {
+            font-weight: 600;
+            color: #000;
+        }
+        
+        .order-date {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .order-status {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .status-delivered {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-processing {
+            background: #cce5ff;
+            color: #004085;
+        }
+        
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .order-items {
+            padding: 20px;
+        }
+        
+        .order-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .order-item:last-child {
+            border-bottom: none;
+        }
+        
+        .order-item-image {
+            width: 60px;
+            height: 60px;
+        }
+        
+        .order-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        
+        .order-item-details {
+            flex: 1;
+        }
+        
+        .order-item-name {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .order-item-price {
+            font-weight: 600;
+            color: #000;
+        }
+        
+        .order-footer {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .order-total {
+            font-weight: 600;
+            font-size: 18px;
+            color: #000;
+        }
+        
+        .profile-form {
+            max-width: 600px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .btn-save {
+            background: #000;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
+        .btn-save:hover {
+            background: #333;
+        }
+        
+        .addresses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .address-card {
+            border: 1px solid #eee;
+            padding: 20px;
+            border-radius: 8px;
+            position: relative;
+        }
+        
+        .address-card.default {
+            border-color: #000;
+            background: #f8f9fa;
+        }
+        
+        .address-default {
+            display: inline-block;
+            background: #000;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .address-actions {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-edit, .btn-delete {
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+        }
+        
+        .btn-edit:hover {
+            color: #000;
+        }
+        
+        .btn-delete:hover {
+            color: #dc3545;
+        }
+        
+        .btn-add-address {
+            border: 2px dashed #ddd;
+            background: none;
+            width: 100%;
+            padding: 40px 20px;
+            border-radius: 8px;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-add-address:hover {
+            border-color: #000;
+            color: #000;
+        }
+        
+        .wishlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .wishlist-item {
+            position: relative;
+        }
+        
+        .remove-wishlist {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            color: #666;
+        }
+        
+        .remove-wishlist:hover {
+            color: #dc3545;
+        }
+        
+        .logout-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .logout-btn:hover {
+            background: #c82333;
+        }
+        
+        @media (max-width: 768px) {
+            .account-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .order-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .order-footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            color: #666;
+        }
+        
+        .empty-state i {
+            font-size: 60px;
+            margin-bottom: 20px;
+            color: #ddd;
+        }
+        
+        .message {
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="index.html">
+                        <span class="logo-text">FASHION</span>
+                        <span class="logo-dot">.</span>
+                    </a>
+                </div>
+                
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html">Strona główna</a></li>
+                        <li><a href="catalog.html">Katalog</a></li>
+                        <li><a href="catalog.html?category=women">Dla kobiet</a></li>
+                        <li><a href="catalog.html?category=men">Dla mężczyzn</a></li>
+                        <li><a href="#new">Nowości</a></li>
+                        <li><a href="#sale">Wyprzedaż</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <a href="cart.html" class="cart-btn">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                    <div class="user-dropdown">
+                        <button class="user-btn" id="user-menu-btn">
+                            <i class="fas fa-user"></i>
+                        </button>
+                    </div>
+                    <button class="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="account-container">
+        <div class="container">
+            <div class="account-header">
+                <div class="account-title">
+                    <h1>Moje konto</h1>
+                    <button class="logout-btn" id="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Wyloguj się
+                    </button>
+                </div>
+                <p class="account-welcome">Witaj ponownie, <span id="user-fullname">Użytkowniku</span></p>
+            </div>
+            
+            <div id="message-container"></div>
+            
+            <div class="account-grid">
+                <aside class="account-sidebar">
+                    <div class="user-info">
+                        <div class="user-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="user-name" id="sidebar-user-name">Użytkownik</div>
+                        <div class="user-email" id="sidebar-user-email">email@example.com</div>
+                    </div>
+                    
+                    <ul class="account-nav">
+                        <li>
+                            <a href="#" data-section="dashboard" class="active">
+                                <i class="fas fa-tachometer-alt"></i>
+                                Pulpit
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" data-section="orders">
+                                <i class="fas fa-shopping-bag"></i>
+                                Moje zamówienia
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" data-section="profile">
+                                <i class="fas fa-user-edit"></i>
+                                Edytuj profil
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" data-section="addresses">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Adresy
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" data-section="wishlist">
+                                <i class="fas fa-heart"></i>
+                                Lista życzeń
+                                <span id="wishlist-count">(0)</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" data-section="settings">
+                                <i class="fas fa-cog"></i>
+                                Ustawienia
+                            </a>
+                        </li>
+                    </ul>
+                </aside>
+                
+                <main class="account-content">
+                    <div id="dashboard-section" class="content-section active">
+                        <h2 class="section-title">Przegląd konta</h2>
+                        
+                        <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 40px;">
+                            <div class="stat-card" style="background: #f8f9fa; padding: 20px; border-radius: 8px; text-align: center;">
+                                <div style="font-size: 32px; font-weight: bold; color: #000;" id="orders-count">0</div>
+                                <div style="font-size: 14px; color: #666;">Zamówień</div>
+                            </div>
+                            <div class="stat-card" style="background: #f8f9fa; padding: 20px; border-radius: 8px; text-align: center;">
+                                <div style="font-size: 32px; font-weight: bold; color: #000;" id="wishlist-total">0</div>
+                                <div style="font-size: 14px; color: #666;">Produktów w liście życzeń</div>
+                            </div>
+                            <div class="stat-card" style="background: #f8f9fa; padding: 20px; border-radius: 8px; text-align: center;">
+                                <div style="font-size: 32px; font-weight: bold; color: #000;">0 zł</div>
+                                <div style="font-size: 14px; color: #666;">Wydano w tym miesiącu</div>
+                            </div>
+                        </div>
+                        
+                        <h3>Ostatnie zamówienia</h3>
+                        <div id="recent-orders-container">
+                        </div>
+                        
+                        <div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 8px;">
+                            <h4>Przydatne informacje</h4>
+                            <ul style="color: #666; line-height: 1.8;">
+                                <li>Śledź status swoich zamówień w zakładce "Moje zamówienia"</li>
+                                <li>Dodawaj produkty do listy życzeń, aby nie zapomnieć o nich</li>
+                                <li>Aktualizuj swoje dane w zakładce "Edytuj profil"</li>
+                                <li>Zapisz swoje ulubione adresy dostawy dla szybszych zakupów</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div id="orders-section" class="content-section">
+                        <h2 class="section-title">Moje zamówienia</h2>
+                        <div id="orders-container">
+                        </div>
+                    </div>
+                    
+                    <div id="profile-section" class="content-section">
+                        <h2 class="section-title">Edytuj profil</h2>
+                        <form id="profile-form" class="profile-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="edit-first_name" class="form-label">Imię *</label>
+                                    <input type="text" id="edit-first_name" name="first_name" class="form-control" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="edit-last_name" class="form-label">Nazwisko *</label>
+                                    <input type="text" id="edit-last_name" name="last_name" class="form-control" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="edit-email" class="form-label">Adres email *</label>
+                                <input type="email" id="edit-email" name="email" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="edit-phone" class="form-label">Numer telefonu</label>
+                                <input type="tel" id="edit-phone" name="phone" class="form-control">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="edit-birthdate" class="form-label">Data urodzenia</label>
+                                <input type="date" id="edit-birthdate" name="birthdate" class="form-control">
+                            </div>
+                            
+                            <button type="submit" class="btn-save">
+                                <i class="fas fa-save"></i> Zapisz zmiany
+                            </button>
+                        </form>
+                        
+                        <h3 style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #f0f0f0;">Zmień hasło</h3>
+                        <form id="password-form" style="max-width: 600px; margin-top: 20px;">
+                            <div class="form-group">
+                                <label for="current_password" class="form-label">Obecne hasło</label>
+                                <input type="password" id="current_password" name="current_password" class="form-control">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="new_password" class="form-label">Nowe hasło</label>
+                                <input type="password" id="new_password" name="new_password" class="form-control" minlength="6">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="confirm_new_password" class="form-label">Potwierdź nowe hasło</label>
+                                <input type="password" id="confirm_new_password" name="confirm_new_password" class="form-control" minlength="6">
+                            </div>
+                            
+                            <button type="submit" class="btn-save">
+                                <i class="fas fa-key"></i> Zmień hasło
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div id="addresses-section" class="content-section">
+                        <h2 class="section-title">Moje adresy</h2>
+                        <div id="addresses-container">
+                        </div>
+                        <button class="btn-add-address" id="add-address-btn">
+                            <i class="fas fa-plus"></i><br>
+                            Dodaj nowy adres
+                        </button>
+                    </div>
+                    
+                    <div id="wishlist-section" class="content-section">
+                        <h2 class="section-title">Lista życzeń</h2>
+                        <div id="wishlist-container">
+                        </div>
+                    </div>
+                    
+                    <div id="settings-section" class="content-section">
+                        <h2 class="section-title">Ustawienia konta</h2>
+                        
+                        <div style="margin-bottom: 30px;">
+                            <h3>Powiadomienia</h3>
+                            <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 15px;">
+                                <label style="display: flex; align-items: center; gap: 10px;">
+                                    <input type="checkbox" checked>
+                                    <span>Powiadomienia email o zamówieniach</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 10px;">
+                                    <input type="checkbox" checked>
+                                    <span>Newsletter z nowościami i promocjami</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 10px;">
+                                    <input type="checkbox">
+                                    <span>Powiadomienia SMS</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 30px;">
+                            <h3>Preferencje</h3>
+                            <div style="margin-top: 15px;">
+                                <label class="form-label">Preferowany język</label>
+                                <select class="form-control" style="max-width: 200px;">
+                                    <option selected>Polski</option>
+                                    <option>English</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3>Konto</h3>
+                            <div style="margin-top: 20px;">
+                                <button class="btn-save" style="background: #dc3545;" id="delete-account-btn">
+                                    <i class="fas fa-trash"></i> Usuń konto
+                                </button>
+                                <p style="font-size: 14px; color: #666; margin-top: 10px;">
+                                    Uwaga: Usunięcie konta jest nieodwracalne. Stracisz dostęp do historii zamówień i listy życzeń.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo">
+                        <a href="index.html">
+                            <span class="logo-text">FASHION</span>
+                            <span class="logo-dot">.</span>
+                        </a>
+                    </div>
+                    <p class="footer-text">Nowoczesna odzież dla tych, którzy cenią jakość i styl.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Sklep</h3>
+                    <ul class="footer-links">
+                        <li><a href="catalog.html?category=women">Odzież damska</a></li>
+                        <li><a href="catalog.html?category=men">Odzież męska</a></li>
+                        <li><a href="catalog.html?category=shoes">Obuwie</a></li>
+                        <li><a href="catalog.html?category=accessories">Akcesoria</a></li>
+                        <li><a href="#new">Nowości</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Informacje</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">O nas</a></li>
+                        <li><a href="#">Dostawa</a></li>
+                        <li><a href="#">Płatności</a></li>
+                        <li><a href="#">Zwroty</a></li>
+                        <li><a href="#">Kontakt</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Kontakt</h3>
+                    <ul class="footer-contacts">
+                        <li><i class="fas fa-map-marker-alt"></i> Warszawa, ul. Marszałkowska 10</li>
+                        <li><i class="fas fa-phone"></i> +48 123 456 789</li>
+                        <li><i class="fas fa-envelope"></i> info@fashion-store.pl</li>
+                        <li><i class="fas fa-clock"></i> Pn-Nd: 10:00 - 22:00</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Fashion Store. Wszelkie prawa zastrzeżone.</p>
+                <div class="footer-payment">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                    <i class="fab fa-cc-stripe"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="address-modal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+        <div style="background: white; padding: 30px; border-radius: 8px; max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto;">
+            <h2 style="margin-bottom: 20px;">Dodaj nowy adres</h2>
+            <form id="add-address-form">
+                <div class="form-group">
+                    <label class="form-label">Nazwa adresu (np. Dom, Praca)</label>
+                    <input type="text" name="address_name" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Ulica i numer *</label>
+                    <input type="text" name="street" class="form-control" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Kod pocztowy *</label>
+                        <input type="text" name="zip_code" class="form-control" required pattern="[0-9]{2}-[0-9]{3}">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Miasto *</label>
+                        <input type="text" name="city" class="form-control" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Kraj *</label>
+                    <select name="country" class="form-control" required>
+                        <option value="PL" selected>Polska</option>
+                        <option value="DE">Niemcy</option>
+                        <option value="CZ">Czechy</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label style="display: flex; align-items: center; gap: 10px;">
+                        <input type="checkbox" name="is_default">
+                        <span>Ustaw jako domyślny adres</span>
+                    </label>
+                </div>
+                
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button type="submit" class="btn-save" style="flex: 1;">
+                        Zapisz adres
+                    </button>
+                    <button type="button" id="cancel-address" class="btn-save" style="flex: 1; background: #6c757d;">
+                        Anuluj
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        class UserAccount {
+            constructor() {
+                this.currentUser = null;
+                this.currentSection = 'dashboard';
+                this.init();
+            }
+            
+            init() {
+                this.checkLogin();
+                this.loadUserData();
+                this.setupEventListeners();
+                this.loadSection();
+                this.loadOrders();
+                this.loadWishlist();
+                this.loadAddresses();
+            }
+            
+            checkLogin() {
+                const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+                if (!isLoggedIn) {
+                    window.location.href = 'login.html';
+                }
+            }
+            
+            loadUserData() {
+                const userData = localStorage.getItem('currentUser');
+                if (userData) {
+                    this.currentUser = JSON.parse(userData);
+                    this.displayUserInfo();
+                } else {
+                    this.currentUser = {
+                        first_name: 'Jan',
+                        last_name: 'Kowalski',
+                        email: 'test@example.com',
+                        phone: '+48 123 456 789'
+                    };
+                }
+            }
+            
+            displayUserInfo() {
+                const fullName = `${this.currentUser.first_name} ${this.currentUser.last_name}`;
+                
+                document.getElementById('user-fullname').textContent = fullName;
+                document.getElementById('sidebar-user-name').textContent = fullName;
+                document.getElementById('sidebar-user-email').textContent = this.currentUser.email;
+                
+                document.getElementById('edit-first_name').value = this.currentUser.first_name || '';
+                document.getElementById('edit-last_name').value = this.currentUser.last_name || '';
+                document.getElementById('edit-email').value = this.currentUser.email || '';
+                document.getElementById('edit-phone').value = this.currentUser.phone || '';
+                document.getElementById('edit-birthdate').value = this.currentUser.birthdate || '';
+            }
+            
+            setupEventListeners() {
+                document.querySelectorAll('.account-nav a').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const section = e.currentTarget.getAttribute('data-section');
+                        this.switchSection(section);
+                    });
+                });
+                
+                document.getElementById('profile-form').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.saveProfile();
+                });
+                
+                document.getElementById('password-form').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.changePassword();
+                });
+                
+                document.getElementById('add-address-form').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.saveAddress();
+                });
+                
+                document.getElementById('logout-btn').addEventListener('click', () => this.logout());
+                document.getElementById('add-address-btn').addEventListener('click', () => this.showAddressModal());
+                document.getElementById('cancel-address').addEventListener('click', () => this.hideAddressModal());
+                document.getElementById('delete-account-btn').addEventListener('click', () => this.deleteAccount());
+                
+                const urlParams = new URLSearchParams(window.location.search);
+                const sectionParam = urlParams.get('section');
+                if (sectionParam) {
+                    this.switchSection(sectionParam);
+                }
+            }
+            
+            switchSection(section) {
+                this.currentSection = section;
+                
+                document.querySelectorAll('.account-nav a').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('data-section') === section) {
+                        link.classList.add('active');
+                    }
+                });
+                
+                document.querySelectorAll('.content-section').forEach(sectionEl => {
+                    sectionEl.classList.remove('active');
+                });
+                
+                document.getElementById(`${section}-section`).classList.add('active');
+                
+                switch(section) {
+                    case 'orders':
+                        this.loadOrders();
+                        break;
+                    case 'wishlist':
+                        this.loadWishlist();
+                        break;
+                    case 'addresses':
+                        this.loadAddresses();
+                        break;
+                }
+            }
+            
+            saveProfile() {
+                const formData = {
+                    first_name: document.getElementById('edit-first_name').value,
+                    last_name: document.getElementById('edit-last_name').value,
+                    email: document.getElementById('edit-email').value,
+                    phone: document.getElementById('edit-phone').value,
+                    birthdate: document.getElementById('edit-birthdate').value
+                };
+                
+                Object.assign(this.currentUser, formData);
+                localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+                
+                this.displayUserInfo();
+                
+                this.showMessage('Profil został zaktualizowany pomyślnie!', 'success');
+            }
+            
+            changePassword() {
+                const currentPassword = document.getElementById('current_password').value;
+                const newPassword = document.getElementById('new_password').value;
+                const confirmPassword = document.getElementById('confirm_new_password').value;
+                
+                if (!currentPassword) {
+                    this.showMessage('Podaj obecne hasło', 'error');
+                    return;
+                }
+                
+                if (newPassword.length < 6) {
+                    this.showMessage('Nowe hasło musi mieć co najmniej 6 znaków', 'error');
+                    return;
+                }
+                
+                if (newPassword !== confirmPassword) {
+                    this.showMessage('Hasła nie są identyczne', 'error');
+                    return;
+                }
+                
+                this.currentUser.password = newPassword;
+                localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+                
+                document.getElementById('password-form').reset();
+                
+                this.showMessage('Hasło zostało zmienione pomyślnie!', 'success');
+            }
+            
+            loadOrders() {
+                const ordersContainer = document.getElementById('orders-container');
+                const recentOrdersContainer = document.getElementById('recent-orders-container');
+                
+                const sampleOrders = [
+                    {
+                        id: 'ORD-2024-001',
+                        date: '2024-01-15',
+                        status: 'delivered',
+                        items: [
+                            { name: 'Elegancka sukienka', price: 499, image: 'assets/images/products/product1.jpg', quantity: 1 },
+                            { name: 'Buty sportowe', price: 399, image: 'assets/images/products/product3.jpg', quantity: 1 }
+                        ],
+                        total: 898
+                    },
+                    {
+                        id: 'ORD-2024-002',
+                        date: '2024-01-10',
+                        status: 'processing',
+                        items: [
+                            { name: 'Męska koszula', price: 299, image: 'assets/images/products/product2.jpg', quantity: 2 }
+                        ],
+                        total: 598
+                    }
+                ];
+                
+                document.getElementById('orders-count').textContent = sampleOrders.length;
+                
+                if (ordersContainer) {
+                    ordersContainer.innerHTML = this.renderOrders(sampleOrders);
+                }
+                
+                if (recentOrdersContainer) {
+                    recentOrdersContainer.innerHTML = this.renderOrders(sampleOrders.slice(0, 2));
+                }
+            }
+            
+            renderOrders(orders) {
+                if (orders.length === 0) {
+                    return `
+                        <div class="empty-state">
+                            <i class="fas fa-shopping-bag"></i>
+                            <h3>Brak zamówień</h3>
+                            <p>Nie masz jeszcze żadnych zamówień</p>
+                            <a href="catalog.html" class="btn btn-primary" style="margin-top: 15px;">Przejdź do sklepu</a>
+                        </div>
+                    `;
+                }
+                
+                let html = '<div class="orders-list">';
+                
+                orders.forEach(order => {
+                    const statusClass = `status-${order.status}`;
+                    const statusText = {
+                        'delivered': 'Dostarczone',
+                        'processing': 'W realizacji',
+                        'pending': 'Oczekujące'
+                    }[order.status] || order.status;
+                    
+                    html += `
+                        <div class="order-card">
+                            <div class="order-header">
+                                <div>
+                                    <div class="order-number">${order.id}</div>
+                                    <div class="order-date">${order.date}</div>
+                                </div>
+                                <div class="order-status ${statusClass}">${statusText}</div>
+                            </div>
+                            
+                            <div class="order-items">
+                    `;
+                    
+                    order.items.forEach(item => {
+                        html += `
+                            <div class="order-item">
+                                <div class="order-item-image">
+                                    <img src="${item.image}" alt="${item.name}">
+                                </div>
+                                <div class="order-item-details">
+                                    <div class="order-item-name">${item.name} × ${item.quantity}</div>
+                                    <div class="order-item-price">${item.price} zł</div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    html += `
+                            </div>
+                            
+                            <div class="order-footer">
+                                <div></div>
+                                <div class="order-total">Razem: ${order.total} zł</div>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                html += '</div>';
+                return html;
+            }
+            
+            loadWishlist() {
+                const container = document.getElementById('wishlist-container');
+                const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+                
+                document.getElementById('wishlist-count').textContent = `(${wishlist.length})`;
+                document.getElementById('wishlist-total').textContent = wishlist.length;
+                
+                if (wishlist.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-heart"></i>
+                            <h3>Lista życzeń jest pusta</h3>
+                            <p>Dodaj produkty, które Cię interesują</p>
+                            <a href="catalog.html" class="btn btn-primary" style="margin-top: 15px;">Przejdź do sklepu</a>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                let html = '<div class="wishlist-grid">';
+                
+                wishlist.forEach(product => {
+                    html += `
+                        <div class="wishlist-item product-card">
+                            <button class="remove-wishlist" data-id="${product.id}">
+                                <i class="fas fa-times"></i>
+                            </button>
+                            <div class="product-image">
+                                <img src="${product.image}" alt="${product.name}">
+                                <a href="product.html?id=${product.id}" class="quick-view">Zobacz produkt</a>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-name">${product.name}</h3>
+                                <div class="product-price">
+                                    <span class="current-price">${product.price} zł</span>
+                                </div>
+                                <button class="btn btn-outline btn-add-to-cart" data-id="${product.id}">
+                                    <i class="fas fa-shopping-bag"></i>
+                                    Do koszyka
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                html += '</div>';
+                container.innerHTML = html;
+                
+                container.querySelectorAll('.remove-wishlist').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const productId = e.currentTarget.getAttribute('data-id');
+                        this.removeFromWishlist(productId);
+                    });
+                });
+            }
+            
+            removeFromWishlist(productId) {
+                let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+                wishlist = wishlist.filter(item => item.id != productId);
+                localStorage.setItem('wishlist', JSON.stringify(wishlist));
+                this.loadWishlist();
+                this.showMessage('Produkt został usunięty z listy życzeń', 'success');
+            }
+            
+            loadAddresses() {
+                const container = document.getElementById('addresses-container');
+                const addresses = JSON.parse(localStorage.getItem('userAddresses')) || [
+                    {
+                        id: 1,
+                        name: 'Dom',
+                        street: 'Marszałkowska 10',
+                        zip_code: '00-001',
+                        city: 'Warszawa',
+                        country: 'Polska',
+                        is_default: true
+                    }
+                ];
+                
+                if (addresses.length === 0) {
+                    container.innerHTML = '';
+                    return;
+                }
+                
+                let html = '<div class="addresses-grid">';
+                
+                addresses.forEach(address => {
+                    html += `
+                        <div class="address-card ${address.is_default ? 'default' : ''}">
+                            ${address.is_default ? '<span class="address-default">Domyślny</span>' : ''}
+                            <h4>${address.name}</h4>
+                            <p>${address.street}<br>
+                            ${address.zip_code} ${address.city}<br>
+                            ${address.country}</p>
+                            <div class="address-actions">
+                                <button class="btn-edit" data-id="${address.id}">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn-delete" data-id="${address.id}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                html += '</div>';
+                container.innerHTML = html;
+            }
+            
+            showAddressModal() {
+                document.getElementById('address-modal').style.display = 'flex';
+            }
+            
+            hideAddressModal() {
+                document.getElementById('address-modal').style.display = 'none';
+                document.getElementById('add-address-form').reset();
+            }
+            
+            saveAddress() {
+                const formData = {
+                    id: Date.now(),
+                    name: document.querySelector('[name="address_name"]').value,
+                    street: document.querySelector('[name="street"]').value,
+                    zip_code: document.querySelector('[name="zip_code"]').value,
+                    city: document.querySelector('[name="city"]').value,
+                    country: document.querySelector('[name="country"]').value,
+                    is_default: document.querySelector('[name="is_default"]').checked
+                };
+                
+                let addresses = JSON.parse(localStorage.getItem('userAddresses')) || [];
+                
+                if (formData.is_default) {
+                    addresses = addresses.map(addr => ({...addr, is_default: false}));
+                }
+                
+                addresses.push(formData);
+                localStorage.setItem('userAddresses', JSON.stringify(addresses));
+                
+                this.hideAddressModal();
+                this.loadAddresses();
+                this.showMessage('Adres został dodany pomyślnie!', 'success');
+            }
+            
+            logout() {
+                if (confirm('Czy na pewno chcesz się wylogować?')) {
+                    localStorage.setItem('isLoggedIn', 'false');
+                    window.location.href = 'login.html';
+                }
+            }
+            
+            deleteAccount() {
+                if (confirm('Czy na pewno chcesz usunąć konto? Ta operacja jest nieodwracalna.')) {
+                    localStorage.removeItem('currentUser');
+                    localStorage.setItem('isLoggedIn', 'false');
+                    window.location.href = 'index.html';
+                }
+            }
+            
+            showMessage(text, type = 'success') {
+                const container = document.getElementById('message-container');
+                container.innerHTML = `
+                    <div class="message ${type}">
+                        ${text}
+                    </div>
+                `;
+                
+                setTimeout(() => {
+                    container.innerHTML = '';
+                }, 3000);
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            new UserAccount();
+            
+            const userMenuBtn = document.getElementById('user-menu-btn');
+            const userDropdownMenu = document.getElementById('user-dropdown-menu');
+            
+            if (userMenuBtn && userDropdownMenu) {
+                userMenuBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    userDropdownMenu.style.display = userDropdownMenu.style.display === 'block' ? 'none' : 'block';
+                });
+                
+                document.addEventListener('click', function() {
+                    userDropdownMenu.style.display = 'none';
+                });
+                
+                document.getElementById('logout-link').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    localStorage.setItem('isLoggedIn', 'false');
+                    window.location.href = 'login.html';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Store | Nowoczesna odzież</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="index.html">
+                        <span class="logo-text">FASHION</span>
+                        <span class="logo-dot">.</span>
+                    </a>
+                </div>
+                
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="active">Strona główna</a></li>
+                        <li><a href="catalog.html">Katalog</a></li>
+                        <li><a href="catalog.html?category=women">Dla kobiet</a></li>
+                        <li><a href="catalog.html?category=men">Dla mężczyzn</a></li>
+                        <li><a href="#new">Nowości</a></li>
+                        <li><a href="#sale">Wyprzedaż</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <a href="cart.html" class="cart-btn">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                     <a href="login.html" class="cart-btn">
+                        <i class="fas fa-user"></i>
+                     <span class="cart-count">0</span>
+                     </a>
+                    <button class="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="search-modal">
+        <div class="search-modal-content">
+            <div class="search-input-wrapper">
+                <input type="text" placeholder="Wyszukaj produkty..." class="search-input">
+                <button class="search-close"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="mobile-menu">
+        <div class="mobile-menu-content">
+            <button class="mobile-menu-close"><i class="fas fa-times"></i></button>
+            <ul class="mobile-nav-list">
+                <li><a href="index.html" class="active">Strona główna</a></li>
+                <li><a href="catalog.html">Katalog</a></li>
+                <li><a href="catalog.html?category=women">Dla kobiet</a></li>
+                <li><a href="catalog.html?category=men">Dla mężczyzn</a></li>
+                <li><a href="#new">Nowości</a></li>
+                <li><a href="#sale">Wyprzedaż</a></li>
+                <li><a href="cart.html">Koszyk</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Nowa kolekcja <span class="highlight">Wiosna 2024</span></h1>
+                <p class="hero-subtitle">Nowoczesna odzież dla nowoczesnego stylu życia</p>
+                <a href="catalog.html" class="btn btn-primary">Zobacz kolekcję</a>
+            </div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-image" style="background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1920&q=80');"></div>
+    </section>
+
+    <section class="categories section-padding">
+        <div class="container">
+            <h2 class="section-title">Kategorie</h2>
+            <div class="categories-grid">
+                <a href="catalog.html?category=women" class="category-card">
+                    <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=600&h=400&q=80');"></div>
+                    <h3 class="category-title">Dla kobiet</h3>
+                </a>
+                <a href="catalog.html?category=men" class="category-card">
+                    <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=600&h=400&q=80');"></div>
+                    <h3 class="category-title">Dla mężczyzn</h3>
+                </a>
+                <a href="catalog.html?category=shoes" class="category-card">
+                    <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=600&h=400&q=80');"></div>
+                    <h3 class="category-title">Obuwie</h3>
+                </a>
+                <a href="catalog.html?category=accessories" class="category-card">
+                    <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1593476087125-4cafbe56b31c?auto=format&fit=crop&w=600&h=400&q=80');"></div>
+                    <h3 class="category-title">Akcesoria</h3>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="products section-padding bg-light" id="sale">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Bestsellery</h2>
+                <a href="catalog.html?sort=popular" class="view-all">Zobacz wszystkie</a>
+            </div>
+            <div class="products-grid" id="best-sellers">
+            </div>
+        </div>
+    </section>
+
+    <section class="products section-padding" id="new">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Nowości</h2>
+                <a href="catalog.html?sort=new" class="view-all">Zobacz wszystkie</a>
+            </div>
+            <div class="products-grid" id="new-arrivals">
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter section-padding bg-dark">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2 class="newsletter-title">Zapisz się do newslettera</h2>
+                <p class="newsletter-text">Bądź pierwszy, dowiedz się o nowych kolekcjach i specjalnych ofertach</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Twój adres email" required class="newsletter-input">
+                    <button type="submit" class="btn btn-light">Zapisz się</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo">
+                        <a href="index.html">
+                            <span class="logo-text">FASHION</span>
+                            <span class="logo-dot">.</span>
+                        </a>
+                    </div>
+                    <p class="footer-text">Nowoczesna odzież dla tych, którzy cenią jakość i styl.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Sklep</h3>
+                    <ul class="footer-links">
+                        <li><a href="catalog.html?category=women">Odzież damska</a></li>
+                        <li><a href="catalog.html?category=men">Odzież męska</a></li>
+                        <li><a href="catalog.html?category=shoes">Obuwie</a></li>
+                        <li><a href="catalog.html?category=accessories">Akcesoria</a></li>
+                        <li><a href="#new">Nowości</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Informacje</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">O nas</a></li>
+                        <li><a href="#">Dostawa</a></li>
+                        <li><a href="#">Płatności</a></li>
+                        <li><a href="#">Zwroty</a></li>
+                        <li><a href="#">Kontakt</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Kontakt</h3>
+                    <ul class="footer-contacts">
+                        <li><i class="fas fa-map-marker-alt"></i> Warszawa, ul. Marszałkowska 10</li>
+                        <li><i class="fas fa-phone"></i> +48 123 456 789</li>
+                        <li><i class="fas fa-envelope"></i> info@fashion-store.pl</li>
+                        <li><i class="fas fa-clock"></i> Pn-Nd: 10:00 - 22:00</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Fashion Store. Wszelkie prawa zastrzeżone.</p>
+                <div class="footer-payment">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                    <i class="fab fa-cc-stripe"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/cart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProducts();
+        });
+        
+        function loadProducts() {
+            const bestSellers = [
+                {
+                    id: 1,
+                    name: "Sukienka wieczorowa",
+                    price: 499,
+                    old_price: 650,
+                    image: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=600&h=800&q=80"
+                },
+                {
+                    id: 2,
+                    name: "Męska koszula",
+                    price: 299,
+                    image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=600&h=800&q=80"
+                },
+                {
+                    id: 3,
+                    name: "Buty sportowe",
+                    price: 399,
+                    old_price: 550,
+                    image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=600&h=800&q=80"
+                },
+                {
+                    id: 4,
+                    name: "Torba skórzana",
+                    price: 249,
+                    image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&h=800&q=80"
+                }
+            ];
+            
+            
+            const newArrivals = [
+                {
+                    id: 5,
+                    name: "Kurtka jeansowa",
+                    price: 599,
+                    image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=600&h=800&q=80"
+                },
+                {
+                    id: 6,
+                    name: "Spódnica midi",
+                    price: 199,
+                    old_price: 350,
+                    image: "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?auto=format&fit=crop&w=600&h=800&q=80"
+                },
+                {
+                    id: 7,
+                    name: "Biżuteria srebrna",
+                    price: 129,
+                    image: "https://images.unsplash.com/photo-1593476087125-4cafbe56b31c?auto=format&fit=crop&w=600&h=800&q=80"
+                },
+                {
+                    id: 8,
+                    name: "Płaszcz jesienny",
+                    price: 449,
+                    image: "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?auto=format&fit=crop&w=600&h=800&q=80"
+                }
+            ];
+            
+            displayProducts('best-sellers', bestSellers);
+            displayProducts('new-arrivals', newArrivals);
+        }
+        
+        function displayProducts(containerId, products) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            
+            products.forEach(product => {
+                const div = document.createElement('div');
+                div.className = 'product-card';
+                div.innerHTML = `
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}" loading="lazy">
+                        ${product.old_price ? '<span class="product-badge">PROMOCJA</span>' : ''}
+                        <a href="product.html?id=${product.id}" class="quick-view">Zobacz produkt</a>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">${product.name}</h3>
+                        <div class="product-price">
+                            <span class="current-price">${product.price} zł</span>
+                            ${product.old_price ? `<span class="old-price">${product.old_price} zł</span>` : ''}
+                        </div>
+                        <button class="btn btn-outline btn-add-to-cart" data-id="${product.id}">
+                            <i class="fas fa-shopping-bag"></i>
+                            Dodaj do koszyka
+                        </button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+    </script>
+</body>
+</html>

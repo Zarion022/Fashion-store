@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produkt | Fashion Store</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="index.html">
+                        <span class="logo-text">FASHION</span>
+                        <span class="logo-dot">.</span>
+                    </a>
+                </div>
+                
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html">Strona główna</a></li>
+                        <li><a href="catalog.html">Katalog</a></li>
+                        <li><a href="catalog.html?category=women">Dla kobiet</a></li>
+                        <li><a href="catalog.html?category=men">Dla mężczyzn</a></li>
+                        <li><a href="#new">Nowości</a></li>
+                        <li><a href="#sale">Wyprzedaż</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <a href="cart.html" class="cart-btn">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                    <a href="login.html" class="cart-btn">
+                        <i class="fas fa-user"></i>
+                     <span class="cart-count">0</span>
+                     </a>
+                    <button class="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="product-details section-padding">
+        <div class="container">
+            <div class="product-details-grid">
+                <div class="product-images">
+                    <div class="main-image">
+                        <img id="main-product-image" src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=800&h=1000&q=80" alt="Elegancka sukienka">
+                    </div>
+                    <div class="image-thumbnails">
+                        <div class="thumbnail active">
+                            <img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=200&h=250&q=80" alt="Sukienka widok 1">
+                        </div>
+                        <div class="thumbnail">
+                            <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=200&h=250&q=80" alt="Sukienka widok 2">
+                        </div>
+                        <div class="thumbnail">
+                            <img src="https://images.unsplash.com/photo-1585487000160-6eb9ce6b5aae?auto=format&fit=crop&w=200&h=250&q=80" alt="Sukienka widok 3">
+                        </div>
+                        <div class="thumbnail">
+                            <img src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=200&h=250&q=80" alt="Sukienka widok 4">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-info">
+                    <div class="breadcrumbs">
+                        <a href="index.html">Strona główna</a>
+                        <i class="fas fa-chevron-right"></i>
+                        <a href="catalog.html">Katalog</a>
+                        <i class="fas fa-chevron-right"></i>
+                        <span id="product-category">Odzież damska</span>
+                    </div>
+                    
+                    <h1 id="product-name" class="product-title">Elegancka sukienka wieczorowa</h1>
+                    <div class="product-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span class="rating-text">(4.5) • 24 opinie</span>
+                    </div>
+                    
+                    <div class="product-price">
+                        <span class="current-price" id="product-price">499 zł</span>
+                        <span class="old-price">650 zł</span>
+                        <span class="discount">-23%</span>
+                    </div>
+                    
+                    <p id="product-description" class="product-description">
+                        Elegancka sukienka z wysokogatunkowej bawełny z wyrafinowanym krojem. Idealna na specjalne okazje. Wykonana z materiału wysokiej jakości, który zapewnia komfort przez cały dzień. Zapięcie z tyłu na zamek błyskawiczny.
+                    </p>
+                    
+                    <div class="product-options">
+                        <div class="option-group">
+                            <h4>Rozmiar:</h4>
+                            <div class="size-selection">
+                                <button class="size-btn" data-size="XS">XS</button>
+                                <button class="size-btn active" data-size="S">S</button>
+                                <button class="size-btn" data-size="M">M</button>
+                                <button class="size-btn" data-size="L">L</button>
+                                <button class="size-btn" data-size="XL">XL</button>
+                            </div>
+                            <a href="#" class="size-guide-link">Tabela rozmiarów</a>
+                        </div>
+                        
+                        <div class="option-group">
+                            <h4>Kolor:</h4>
+                            <div class="color-selection">
+                                <button class="color-btn active" data-color="black" style="background-color: #000;"></button>
+                                <button class="color-btn" data-color="beige" style="background-color: #F5F5DC;"></button>
+                                <button class="color-btn" data-color="blue" style="background-color: #4169E1;"></button>
+                            </div>
+                        </div>
+                        
+                        <div class="option-group">
+                            <h4>Ilość:</h4>
+                            <div class="quantity-selector">
+                                <button class="quantity-btn minus">-</button>
+                                <input type="number" class="quantity-input" value="1" min="1" max="10">
+                                <button class="quantity-btn plus">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-actions">
+                        <button class="btn btn-primary btn-add-to-cart" data-product-id="1">
+                            <i class="fas fa-shopping-bag"></i>
+                            Dodaj do koszyka
+                        </button>
+                        <button class="btn btn-outline btn-wishlist">
+                            <i class="far fa-heart"></i>
+                            Do ulubionych
+                        </button>
+                    </div>
+                    
+                    <div class="product-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-truck"></i>
+                            <div>
+                                <strong>Darmowa dostawa</strong>
+                                <span>Przy zamówieniu od 200 zł</span>
+                            </div>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-undo"></i>
+                            <div>
+                                <strong>Zwrot w ciągu 14 dni</strong>
+                                <span>Bez podawania przyczyny</span>
+                            </div>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <div>
+                                <strong>Gwarancja jakości</strong>
+                                <span>Oficjalna gwarancja</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-tabs">
+                <div class="tabs-header">
+                    <button class="tab-btn active" data-tab="description">Opis</button>
+                    <button class="tab-btn" data-tab="details">Szczegóły</button>
+                    <button class="tab-btn" data-tab="reviews">Opinie (24)</button>
+                    <button class="tab-btn" data-tab="shipping">Dostawa</button>
+                </div>
+                
+                <div class="tabs-content">
+                    <div class="tab-pane active" id="description">
+                        <h3>Opis produktu</h3>
+                        <p>Elegancka sukienka wykonana z wysokiej jakości materiału, który zapewnia komfort i swobodę ruchów. Idealny wybór na spotkania biznesowe, wieczorne wydarzenia i codzienne noszenie. Sukienka posiada klasyczny krój, który podkreśla sylwetkę.</p>
+                        <ul>
+                            <li>Materiał: 95% bawełna, 5% elastan</li>
+                            <li>Pielęgnacja: Pranie w pralce w 30°C</li>
+                            <li>Produkcja: Włochy</li>
+                            <li>Sezon: Wiosna/Lato</li>
+                            <li>Długość: Mid-calf</li>
+                            <li>Zapięcie: Zamek z tyłu</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tab-pane" id="details">
+                        <h3>Szczegóły</h3>
+                        <table class="details-table">
+                            <tr>
+                                <th>Numer produktu</th>
+                                <td>FS-2024-SU-001</td>
+                            </tr>
+                            <tr>
+                                <th>Kolory</th>
+                                <td>Czarny, Beżowy, Niebieski</td>
+                            </tr>
+                            <tr>
+                                <th>Rozmiary</th>
+                                <td>XS, S, M, L, XL</td>
+                            </tr>
+                            <tr>
+                                <th>Skład</th>
+                                <td>95% bawełna, 5% elastan</td>
+                            </tr>
+                            <tr>
+                                <th>Długość</th>
+                                <td>110 cm</td>
+                            </tr>
+                            <tr>
+                                <th>Waga</th>
+                                <td>350 g</td>
+                            </tr>
+                            <tr>
+                                <th>Kraj produkcji</th>
+                                <td>Włochy</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="tab-pane" id="reviews">
+                        <h3>Opinie klientów (24)</h3>
+                        <div class="review-summary">
+                            <div class="overall-rating">
+                                <div class="rating-number">4.5</div>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <p>Średnia ocena</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="shipping">
+                        <h3>Dostawa i zwroty</h3>
+                        <ul>
+                            <li><strong>Dostawa kurierska:</strong> 2-3 dni robocze (15 zł)</li>
+                            <li><strong>Dostawa ekspresowa:</strong> 24 godziny (25 zł)</li>
+                            <li><strong>Odbiór osobisty:</strong> Warszawa, ul. Marszałkowska 10 (0 zł)</li>
+                            <li><strong>Darmowa dostawa:</strong> Dla zamówień powyżej 200 zł</li>
+                            <li><strong>Zwroty:</strong> Do 14 dni bez podania przyczyny</li>
+                            <li><strong>Wymiana:</strong> Do 30 dni od zakupu</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="related-products section-padding bg-light">
+        <div class="container">
+            <h2 class="section-title">Podobne produkty</h2>
+            <div class="products-grid" id="related-products">
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo">
+                        <a href="index.html">
+                            <span class="logo-text">FASHION</span>
+                            <span class="logo-dot">.</span>
+                        </a>
+                    </div>
+                    <p class="footer-text">Nowoczesna odzież dla tych, którzy cenią jakość i styl.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Sklep</h3>
+                    <ul class="footer-links">
+                        <li><a href="catalog.html?category=women">Odzież damska</a></li>
+                        <li><a href="catalog.html?category=men">Odzież męska</a></li>
+                        <li><a href="catalog.html?category=shoes">Obuwie</a></li>
+                        <li><a href="catalog.html?category=accessories">Akcesoria</a></li>
+                        <li><a href="#new">Nowości</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Informacje</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">O nas</a></li>
+                        <li><a href="#">Dostawa</a></li>
+                        <li><a href="#">Płatności</a></li>
+                        <li><a href="#">Zwroty</a></li>
+                        <li><a href="#">Kontakt</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Kontakt</h3>
+                    <ul class="footer-contacts">
+                        <li><i class="fas fa-map-marker-alt"></i> Warszawa, ul. Marszałkowska 10</li>
+                        <li><i class="fas fa-phone"></i> +48 123 456 789</li>
+                        <li><i class="fas fa-envelope"></i> info@fashion-store.pl</li>
+                        <li><i class="fas fa-clock"></i> Pn-Nd: 10:00 - 22:00</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Fashion Store. Wszelkie prawa zastrzeżone.</p>
+                <div class="footer-payment">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                    <i class="fab fa-cc-stripe"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/cart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            setupProductPage();
+            loadRelatedProducts();
+        });
+        
+        function setupProductPage() {
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            const mainImage = document.getElementById('main-product-image');
+            
+            thumbnails.forEach(thumb => {
+                thumb.addEventListener('click', function() {
+                    thumbnails.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    mainImage.src = this.querySelector('img').src;
+                });
+            });
+            
+            const sizeBtns = document.querySelectorAll('.size-btn');
+            sizeBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    sizeBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            const colorBtns = document.querySelectorAll('.color-btn');
+            colorBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    colorBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Ilość
+            const quantityInput = document.querySelector('.quantity-input');
+            const minusBtn = document.querySelector('.quantity-btn.minus');
+            const plusBtn = document.querySelector('.quantity-btn.plus');
+            
+            minusBtn.addEventListener('click', () => {
+                let value = parseInt(quantityInput.value);
+                if (value > 1) {
+                    quantityInput.value = value - 1;
+                }
+            });
+            
+            plusBtn.addEventListener('click', () => {
+                let value = parseInt(quantityInput.value);
+                if (value < 10) {
+                    quantityInput.value = value + 1;
+                }
+            });
+            
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabPanes = document.querySelectorAll('.tab-pane');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    tabPanes.forEach(pane => {
+                        pane.classList.remove('active');
+                        if (pane.id === tabId) {
+                            pane.classList.add('active');
+                        }
+                    });
+                });
+            });
+
+            document.querySelector('.btn-add-to-cart').addEventListener('click', function() {
+                const product = {
+                    id: this.getAttribute('data-product-id'),
+                    name: document.getElementById('product-name').textContent,
+                    price: 499,
+                    image: document.getElementById('main-product-image').src,
+                    size: document.querySelector('.size-btn.active').getAttribute('data-size'),
+                    color: document.querySelector('.color-btn.active').getAttribute('data-color'),
+                    quantity: parseInt(document.querySelector('.quantity-input').value)
+                };
+                
+                addToCart(product);
+                
+                this.innerHTML = '<i class="fas fa-check"></i> Dodano do koszyka';
+                this.classList.add('btn-success');
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fas fa-shopping-bag"></i> Dodaj do koszyka';
+                    this.classList.remove('btn-success');
+                }, 2000);
+            });
+
+            document.querySelector('.btn-wishlist').addEventListener('click', function() {
+                if (this.classList.contains('active')) {
+                    this.innerHTML = '<i class="far fa-heart"></i> Do ulubionych';
+                    this.classList.remove('active');
+                } else {
+                    this.innerHTML = '<i class="fas fa-heart"></i> W ulubionych';
+                    this.classList.add('active');
+                }
+            });
+        }
+        
+        function addToCart(product) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            const existingItem = cart.find(item => 
+                item.id === product.id && 
+                item.size === product.size && 
+                item.color === product.color
+            );
+            
+            if (existingItem) {
+                existingItem.quantity += product.quantity;
+            } else {
+                cart.push(product);
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            updateCartCounter();
+            
+            showNotification('Produkt dodany do koszyka!');
+        }
+        
+        function updateCartCounter() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            document.querySelectorAll('.cart-count').forEach(el => {
+                el.textContent = totalItems;
+            });
+        }
+        
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-check-circle"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+        
+        function loadRelatedProducts() {
+            const relatedProducts = [
+                {
+                    id: 9,
+                    name: "Sukienka koktajlowa",
+                    price: 399,
+                    old_price: 550,
+                    image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=600&h=800&q=80"
+                },
+                {
+                    id: 10,
+                    name: "Sukienka letnia",
+                    price: 299,
+                    image: "https://images.unsplash.com/photo-1585487000160-6eb9ce6b5aae?auto=format&fit=crop&w=600&h=800&q=80"
+                },
+                {
+                    id: 11,
+                    name: "Sukienka wieczorowa",
+                    price: 699,
+                    image: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=600&h=800&q=80"
+                },
+                {
+                    id: 12,
+                    name: "Sukienka biznesowa",
+                    price: 349,
+                    old_price: 450,
+                    image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=600&h=800&q=80"
+                }
+            ];
+            
+            const container = document.getElementById('related-products');
+            container.innerHTML = '';
+            
+            relatedProducts.forEach(product => {
+                const div = document.createElement('div');
+                div.className = 'product-card';
+                div.innerHTML = `
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}" loading="lazy">
+                        ${product.old_price ? '<span class="product-badge">PROMOCJA</span>' : ''}
+                        <a href="product.html?id=${product.id}" class="quick-view">Zobacz produkt</a>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">${product.name}</h3>
+                        <div class="product-price">
+                            <span class="current-price">${product.price} zł</span>
+                            ${product.old_price ? `<span class="old-price">${product.old_price} zł</span>` : ''}
+                        </div>
+                        <button class="btn btn-outline btn-add-to-cart" data-id="${product.id}">
+                            <i class="fas fa-shopping-bag"></i>
+                            Do koszyka
+                        </button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+    </script>
+
+    <style>
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: #4CAF50;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+        }
+        
+        .notification-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .notification i {
+            font-size: 20px;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .btn-success {
+            background-color: #4CAF50 !important;
+            border-color: #4CAF50 !important;
+        }
+        
+        .review-summary {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .overall-rating {
+            text-align: center;
+        }
+        
+        .rating-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .stars {
+            margin: 10px 0;
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logowanie | Fashion Store</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .auth-container {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 0;
+            background: #f5f5f5;
+        }
+        
+        .auth-card {
+            background: white;
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .auth-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #000;
+        }
+        
+        .auth-logo {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 32px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #000;
+        }
+        
+        .btn-auth {
+            width: 100%;
+            padding: 15px;
+            background: #000;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+        
+        .btn-auth:hover {
+            background: #333;
+        }
+        
+        .auth-divider {
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .auth-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #eee;
+        }
+        
+        .auth-divider span {
+            background: white;
+            padding: 0 15px;
+            color: #666;
+        }
+        
+        .social-login {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .btn-social {
+            padding: 12px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-social:hover {
+            background: #f8f9fa;
+        }
+        
+        .btn-social.facebook {
+            color: #1877F2;
+        }
+        
+        .btn-social.google {
+            color: #DB4437;
+        }
+        
+        .auth-footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+        }
+        
+        .auth-footer a {
+            color: #000;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .password-toggle {
+            position: relative;
+        }
+        
+        .password-toggle .form-control {
+            padding-right: 40px;
+        }
+        
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+        }
+        
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .remember-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .forgot-password {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .forgot-password:hover {
+            color: #000;
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .auth-card {
+                padding: 30px 20px;
+            }
+            
+            .remember-forgot {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+        
+        .message {
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .demo-credentials {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .demo-credentials strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="index.html">
+                        <span class="logo-text">FASHION</span>
+                        <span class="logo-dot">.</span>
+                    </a>
+                </div>
+                
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html">Strona główna</a></li>
+                        <li><a href="catalog.html">Katalog</a></li>
+                        <li><a href="catalog.html?category=women">Dla kobiet</a></li>
+                        <li><a href="catalog.html?category=men">Dla mężczyzn</a></li>
+                        <li><a href="#new">Nowości</a></li>
+                        <li><a href="#sale">Wyprzedaż</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+    <button class="search-btn">
+        <i class="fas fa-search"></i>
+    </button>
+    <a href="cart.html" class="cart-btn">
+        <i class="fas fa-shopping-bag"></i>
+        <span class="cart-count">0</span>
+    </a>
+    <a href="login.html" class="cart-btn">
+                        <i class="fas fa-user"></i>
+                     <span class="cart-count">0</span>
+                     </a>
+    
+    <button class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+    </button>
+</div>
+            </div>
+        </div>
+    </header>
+
+    <section class="auth-container">
+        <div class="container">
+            <div class="auth-card">
+                <div class="auth-logo">
+                    <a href="index.html" style="color: #000; text-decoration: none;">
+                        <span class="logo-text">FASHION</span>
+                        <span class="logo-dot">.</span>
+                    </a>
+                </div>
+                
+                <h1 class="auth-title">Zaloguj się</h1>
+                
+                <div id="message-container"></div>
+                
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="email" class="form-label">Adres email *</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password" class="form-label">Hasło *</label>
+                        <div class="password-toggle">
+                            <input type="password" id="password" name="password" class="form-control" required>
+                            <button type="button" class="toggle-password" data-target="password">
+                                <i class="far fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="remember-forgot">
+                        <div class="remember-checkbox">
+                            <input type="checkbox" id="remember" name="remember">
+                            <label for="remember">Zapamiętaj mnie</label>
+                        </div>
+                        
+                        <a href="forgot-password.html" class="forgot-password">Zapomniałeś hasła?</a>
+                    </div>
+                    
+                    <button type="submit" class="btn-auth">
+                        <i class="fas fa-sign-in-alt"></i> Zaloguj się
+                    </button>
+                </form>
+                
+                <div class="auth-divider">
+                    <span>Lub zaloguj się przez</span>
+                </div>
+                
+                <div class="social-login">
+                    <button type="button" class="btn-social facebook">
+                        <i class="fab fa-facebook-f"></i> Kontynuuj z Facebook
+                    </button>
+                    <button type="button" class="btn-social google">
+                        <i class="fab fa-google"></i> Kontynuuj z Google
+                    </button>
+                </div>
+                
+                <div class="auth-footer">
+                    Nie masz konta? <a href="register.html">Zarejestruj się</a>
+                </div>
+                
+                <div class="demo-credentials">
+                    <strong>Dane testowe:</strong>
+                    Email: test@example.com<br>
+                    Hasło: test123
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo">
+                        <a href="index.html">
+                            <span class="logo-text">FASHION</span>
+                            <span class="logo-dot">.</span>
+                    </div>
+                    <p class="footer-text">Nowoczesna odzież dla tych, którzy cenią jakość i styl.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Sklep</h3>
+                    <ul class="footer-links">
+                        <li><a href="catalog.html?category=women">Odzież damska</a></li>
+                        <li><a href="catalog.html?category=men">Odzież męska</a></li>
+                        <li><a href="catalog.html?category=shoes">Obuwie</a></li>
+                        <li><a href="catalog.html?category=accessories">Akcesoria</a></li>
+                        <li><a href="#new">Nowości</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Informacje</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">O nas</a></li>
+                        <li><a href="#">Dostawa</a></li>
+                        <li><a href="#">Płatności</a></li>
+                        <li><a href="#">Zwroty</a></li>
+                        <li><a href="#">Kontakt</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Kontakt</h3>
+                    <ul class="footer-contacts">
+                        <li><i class="fas fa-map-marker-alt"></i> Warszawa, ul. Marszałkowska 10</li>
+                        <li><i class="fas fa-phone"></i> +48 123 456 789</li>
+                        <li><i class="fas fa-envelope"></i> info@fashion-store.pl</li>
+                        <li><i class="fas fa-clock"></i> Pn-Nd: 10:00 - 22:00</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Fashion Store. Wszelkie prawa zastrzeżone.</p>
+                <div class="footer-payment">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                    <i class="fab fa-cc-stripe"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.toggle-password').forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    const input = document.getElementById(targetId);
+                    const icon = this.querySelector('i');
+                    
+                    if (input.type === 'password') {
+                        input.type = 'text';
+                        icon.classList.remove('fa-eye');
+                        icon.classList.add('fa-eye-slash');
+                    } else {
+                        input.type = 'password';
+                        icon.classList.remove('fa-eye-slash');
+                        icon.classList.add('fa-eye');
+                    }
+                });
+            });
+            
+            const form = document.getElementById('login-form');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('email').value.trim();
+                const password = document.getElementById('password').value;
+                const remember = document.getElementById('remember').checked;
+                
+                const errors = [];
+                
+                if (!email) {
+                    errors.push('Email jest wymagany');
+                }
+                
+                if (!password) {
+                    errors.push('Hasło jest wymagane');
+                }
+                
+                const messageContainer = document.getElementById('message-container');
+                
+                if (errors.length > 0) {
+                    messageContainer.innerHTML = `
+                        <div class="message error">
+                            <strong>Popraw następujące błędy:</strong><br>
+                            ${errors.join('<br>')}
+                        </div>
+                    `;
+                } else {
+                    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+                    const testEmail = 'test@example.com';
+                    const testPassword = 'test123';
+                    
+                    if ((email === currentUser.email && password === currentUser.password) ||
+                        (email === testEmail && password === testPassword)) {
+                        
+                        localStorage.setItem('isLoggedIn', 'true');
+                        
+                        if (remember) {
+                            localStorage.setItem('rememberLogin', 'true');
+                        }
+                        
+                        messageContainer.innerHTML = `
+                            <div class="message success">
+                                <strong>Logowanie udane!</strong><br>
+                                Za chwilę zostaniesz przekierowany.
+                            </div>
+                        `;
+                        
+                        setTimeout(() => {
+                            window.location.href = 'account.html';
+                        }, 2000);
+                        
+                    } else {
+                        messageContainer.innerHTML = `
+                            <div class="message error">
+                                <strong>Błąd logowania</strong><br>
+                                Nieprawidłowy email lub hasło.
+                            </div>
+                        `;
+                    }
+                }
+            });
+            
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            if (isLoggedIn) {
+                window.location.href = 'account.html';
+            }
+            
+            document.getElementById('email').value = 'test@example.com';
+            document.getElementById('password').value = 'test123';
+        });
+    </script>
+</body>
+</html>

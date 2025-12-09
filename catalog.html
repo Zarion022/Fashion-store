@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katalog | Fashion Store</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Дополнительные стили для фильтров */
+        .filter-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        
+        .filter-option input {
+            margin-right: 10px;
+        }
+        
+        .size-option, .color-option {
+            cursor: pointer;
+            border: 2px solid #ddd;
+            background: white;
+            transition: all 0.3s;
+        }
+        
+        .size-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
+            margin: 5px;
+            font-weight: 600;
+        }
+        
+        .size-option.active {
+            background: #333;
+            color: white;
+            border-color: #333;
+        }
+        
+        .color-option {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            margin: 5px;
+            border: 2px solid #ddd;
+        }
+        
+        .color-option.active {
+            border-color: #333;
+            transform: scale(1.1);
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        }
+        
+        .product-card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #ff4757;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .no-products {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+        
+        .no-products i {
+            font-size: 48px;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+        
+        .filter-group {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .filter-title {
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .price-slider {
+            width: 100%;
+            margin: 15px 0;
+        }
+        
+        .price-values {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .filters-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .clear-filters {
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: underline;
+        }
+        
+        .clear-filters:hover {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="index.html">
+                        <span class="logo-text">FASHION</span>
+                        <span class="logo-dot">.</span>
+                    </a>
+                </div>
+                
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html">Strona główna</a></li>
+                        <li><a href="catalog.html" class="active">Katalog</a></li>
+                        <li><a href="catalog.html?category=women">Dla kobiet</a></li>
+                        <li><a href="catalog.html?category=men">Dla mężczyzn</a></li>
+                        <li><a href="#new">Nowości</a></li>
+                        <li><a href="#sale">Wyprzedaż</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <a href="cart.html" class="cart-btn">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                    
+                    <a href="login.html" class="cart-btn">
+                        <i class="fas fa-user"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                    <button class="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-header section-padding">
+        <div class="container">
+            <h1 class="page-title">Katalog produktów</h1>
+            <p class="page-subtitle">Znajdź idealną odzież na każdą okazję</p>
+        </div>
+    </section>
+
+    <section class="catalog section-padding">
+        <div class="container">
+            <div class="catalog-grid">
+                <aside class="filters-sidebar">
+                    <div class="filters-header">
+                        <h3>Filtry</h3>
+                        <button class="clear-filters" id="clear-filters">Wyczyść</button>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4 class="filter-title">Kategorie</h4>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox" name="category" value="women" checked>
+                                <span class="checkmark"></span>
+                                Odzież damska
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="category" value="men" checked>
+                                <span class="checkmark"></span>
+                                Odzież męska
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="category" value="shoes" checked>
+                                <span class="checkmark"></span>
+                                Obuwie
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="category" value="accessories" checked>
+                                <span class="checkmark"></span>
+                                Akcesoria
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4 class="filter-title">Rozmiar</h4>
+                        <div class="size-options">
+                            <button class="size-option" data-size="XS">XS</button>
+                            <button class="size-option" data-size="S">S</button>
+                            <button class="size-option" data-size="M">M</button>
+                            <button class="size-option" data-size="L">L</button>
+                            <button class="size-option" data-size="XL">XL</button>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4 class="filter-title">Kolor</h4>
+                        <div class="color-options">
+                            <button class="color-option" data-color="black" style="background-color: #000;"></button>
+                            <button class="color-option" data-color="white" style="background-color: #fff;"></button>
+                            <button class="color-option" data-color="gray" style="background-color: #808080;"></button>
+                            <button class="color-option" data-color="blue" style="background-color: #4169E1;"></button>
+                            <button class="color-option" data-color="red" style="background-color: #DC143C;"></button>
+                            <button class="color-option" data-color="green" style="background-color: #228B22;"></button>
+                            <button class="color-option" data-color="beige" style="background-color: #F5F5DC;"></button>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4 class="filter-title">Cena</h4>
+                        <div class="price-range">
+                            <input type="range" min="0" max="2000" value="2000" class="price-slider" id="price-max">
+                            <div class="price-values">
+                                <span>0 zł</span>
+                                <span id="max-price-value">2 000 zł</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary apply-filters" id="apply-filters">Zastosuj filtry</button>
+                </aside>
+                
+                <div class="products-container">
+                    <div class="products-header">
+                        <div class="sort-options">
+                            <label>Sortuj według:</label>
+                            <select class="sort-select" id="sort-select">
+                                <option value="default">Domyślnie</option>
+                                <option value="price_asc">Ceny: od najniższej</option>
+                                <option value="price_desc">Ceny: od najwyższej</option>
+                                <option value="name_asc">Nazwy: A-Z</option>
+                                <option value="name_desc">Nazwy: Z-A</option>
+                            </select>
+                        </div>
+                        <div class="products-count">
+                            Znaleziono produktów: <span id="total-products">0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="products-grid" id="catalog-products">
+                    </div>
+                    
+                    <div class="pagination">
+                        <button class="pagination-btn prev" disabled>
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div class="pagination-numbers">
+                            <button class="pagination-number active">1</button>
+                            <button class="pagination-number">2</button>
+                            <button class="pagination-number">3</button>
+                        </div>
+                        <button class="pagination-btn next">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo">
+                        <a href="index.html">
+                            <span class="logo-text">FASHION</span>
+                            <span class="logo-dot">.</span>
+                        </a>
+                    </div>
+                    <p class="footer-text">Nowoczesna odzież dla tych, którzy cenią jakość i styl.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Sklep</h3>
+                    <ul class="footer-links">
+                        <li><a href="catalog.html?category=women">Odzież damska</a></li>
+                        <li><a href="catalog.html?category=men">Odzież męska</a></li>
+                        <li><a href="catalog.html?category=shoes">Obuwie</a></li>
+                        <li><a href="catalog.html?category=accessories">Akcesoria</a></li>
+                        <li><a href="#new">Nowości</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Informacje</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">O nas</a></li>
+                        <li><a href="#">Dostawa</a></li>
+                        <li><a href="#">Płatności</a></li>
+                        <li><a href="#">Zwroty</a></li>
+                        <li><a href="#">Kontakt</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Kontakt</h3>
+                    <ul class="footer-contacts">
+                        <li><i class="fas fa-map-marker-alt"></i> Warszawa, ul. Marszałkowska 10</li>
+                        <li><i class="fas fa-phone"></i> +48 123 456 789</li>
+                        <li><i class="fas fa-envelope"></i> info@fashion-store.pl</li>
+                        <li><i class="fas fa-clock"></i> Pn-Nd: 10:00 - 22:00</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Fashion Store. Wszelkie prawa zastrzeżone.</p>
+                <div class="footer-payment">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                    <i class="fab fa-cc-stripe"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let allProducts = [];
+        let filteredProducts = [];
+        let currentFilters = {
+            categories: ['women', 'men', 'shoes', 'accessories'],
+            sizes: [],
+            colors: [],
+            maxPrice: 2000
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCatalog();
+        });
+
+        function initializeCatalog() {
+            loadCatalogProducts();
+            setupFilters();
+            setupSorting();
+            setupClearFilters();
+        }
+        
+        function loadCatalogProducts() {
+            allProducts = [
+                {
+                    id: 1,
+                    name: "Elegancka sukienka",
+                    price: 499,
+                    old_price: 650,
+                    category: "women",
+                    image: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=600&h=800&q=80",
+                    sizes: ["XS", "S", "M", "L"],
+                    colors: ["black", "beige"]
+                },
+                {
+                    id: 2,
+                    name: "Męska koszula",
+                    price: 299,
+                    category: "men",
+                    image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=600&h=800&q=80",
+                    sizes: ["S", "M", "L", "XL"],
+                    colors: ["blue", "white"]
+                },
+                {
+                    id: 3,
+                    name: "Buty sportowe",
+                    price: 399,
+                    old_price: 550,
+                    category: "shoes",
+                    image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=600&h=800&q=80",
+                    sizes: ["38", "39", "40", "41", "42"],
+                    colors: ["white", "black"]
+                },
+                {
+                    id: 4,
+                    name: "Torba skórzana",
+                    price: 249,
+                    category: "accessories",
+                    image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&h=800&q=80",
+                    colors: ["black", "brown"]
+                },
+                {
+                    id: 5,
+                    name: "Kurtka jeansowa",
+                    price: 599,
+                    category: "men",
+                    image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=600&h=800&q=80",
+                    sizes: ["M", "L", "XL"],
+                    colors: ["blue", "black"]
+                },
+                {
+                    id: 6,
+                    name: "Spódnica midi",
+                    price: 199,
+                    old_price: 350,
+                    category: "women",
+                    image: "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?auto=format&fit=crop&w=600&h=800&q=80",
+                    sizes: ["XS", "S", "M"],
+                    colors: ["black", "gray"]
+                },
+                {
+                    id: 7,
+                    name: "Biżuteria srebrna",
+                    price: 129,
+                    category: "accessories",
+                    image: "https://images.unsplash.com/photo-1593476087125-4cafbe56b31c?auto=format&fit=crop&w=600&h=800&q=80",
+                    colors: ["silver", "gold"]
+                },
+                {
+                    id: 8,
+                    name: "Płaszcz jesienny",
+                    price: 449,
+                    category: "women",
+                    image: "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?auto=format&fit=crop&w=600&h=800&q=80",
+                    sizes: ["S", "M", "L"],
+                    colors: ["beige", "gray"]
+                },
+                {
+                    id: 9,
+                    name: "Czapka zimowa",
+                    price: 89,
+                    category: "accessories",
+                    image: "https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?auto=format&fit=crop&w=600&h=800&q=80",
+                    colors: ["red", "blue", "green"]
+                },
+                {
+                    id: 10,
+                    name: "Sweter męski",
+                    price: 349,
+                    category: "men",
+                    image: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=600&h=800&q=80",
+                    sizes: ["S", "M", "L", "XL"],
+                    colors: ["gray", "blue"]
+                },
+                {
+                    id: 11,
+                    name: "Sukienka wieczorowa",
+                    price: 899,
+                    category: "women",
+                    image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=600&h=800&q=80",
+                    sizes: ["XS", "S", "M"],
+                    colors: ["black", "red"]
+                },
+                {
+                    id: 12,
+                    name: "Spodnie jeansowe",
+                    price: 299,
+                    old_price: 399,
+                    category: "men",
+                    image: "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=600&h=800&q=80",
+                    sizes: ["S", "M", "L", "XL"],
+                    colors: ["blue", "black"]
+                }
+            ];
+            
+            filteredProducts = [...allProducts];
+            displayCatalogProducts(filteredProducts);
+        }
+        
+        function displayCatalogProducts(products) {
+            const container = document.getElementById('catalog-products');
+            
+            if (products.length === 0) {
+                container.innerHTML = `
+                    <div class="no-products">
+                        <i class="fas fa-search"></i>
+                        <h3>Nie znaleziono produktów</h3>
+                        <p>Spróbuj zmienić kryteria wyszukiwania</p>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = '';
+                products.forEach(product => {
+                    const productCard = createProductCard(product);
+                    container.appendChild(productCard);
+                });
+            }
+            
+            document.getElementById('total-products').textContent = products.length;
+        }
+        
+        function createProductCard(product) {
+            const div = document.createElement('div');
+            div.className = 'product-card';
+            div.innerHTML = `
+                <div class="product-image">
+                    <img src="${product.image}" alt="${product.name}" loading="lazy">
+                    ${product.old_price ? '<span class="product-badge">PROMOCJA</span>' : ''}
+                    <a href="product.html?id=${product.id}" class="quick-view">Szybki podgląd</a>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">${product.name}</h3>
+                    <div class="product-price">
+                        <span class="current-price">${product.price} zł</span>
+                        ${product.old_price ? `<span class="old-price">${product.old_price} zł</span>` : ''}
+                    </div>
+                    <button class="btn btn-outline btn-add-to-cart" data-id="${product.id}">
+                        <i class="fas fa-shopping-bag"></i>
+                        Dodaj do koszyka
+                    </button>
+                </div>
+            `;
+            return div;
+        }
+        
+        function setupFilters() {
+            const applyButton = document.getElementById('apply-filters');
+            const priceSlider = document.getElementById('price-max');
+            const priceValue = document.getElementById('max-price-value');
+            
+            priceSlider.addEventListener('input', function() {
+                const value = parseInt(this.value).toLocaleString('pl-PL');
+                priceValue.textContent = value + ' zł';
+                currentFilters.maxPrice = parseInt(this.value);
+                applyFilters();
+            });
+            
+            document.querySelectorAll('.filter-option input').forEach(cb => {
+                cb.addEventListener('change', function() {
+                    updateCategoriesFilter();
+                    applyFilters();
+                });
+            });
+            
+            document.querySelectorAll('.size-option').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    updateSizesFilter();
+                    applyFilters();
+                });
+            });
+            
+            document.querySelectorAll('.color-option').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    updateColorsFilter();
+                    applyFilters();
+                });
+            });
+        }
+        
+        function setupClearFilters() {
+            const clearButton = document.getElementById('clear-filters');
+            clearButton.addEventListener('click', function() {
+                document.querySelectorAll('.filter-option input').forEach(cb => {
+                    cb.checked = true;
+                });
+                currentFilters.categories = ['women', 'men', 'shoes', 'accessories'];
+                
+                document.querySelectorAll('.size-option.active').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                currentFilters.sizes = [];
+                
+                document.querySelectorAll('.color-option.active').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                currentFilters.colors = [];
+                
+                const priceSlider = document.getElementById('price-max');
+                priceSlider.value = 2000;
+                document.getElementById('max-price-value').textContent = '2 000 zł';
+                currentFilters.maxPrice = 2000;
+                
+                applyFilters();
+            });
+        }
+        
+        function updateCategoriesFilter() {
+            currentFilters.categories = [];
+            document.querySelectorAll('.filter-option input:checked').forEach(cb => {
+                currentFilters.categories.push(cb.value);
+            });
+        }
+        
+        function updateSizesFilter() {
+            currentFilters.sizes = [];
+            document.querySelectorAll('.size-option.active').forEach(btn => {
+                currentFilters.sizes.push(btn.dataset.size);
+            });
+        }
+        
+        function updateColorsFilter() {
+            currentFilters.colors = [];
+            document.querySelectorAll('.color-option.active').forEach(btn => {
+                currentFilters.colors.push(btn.dataset.color);
+            });
+        }
+        
+        function applyFilters() {
+            filteredProducts = allProducts.filter(product => {
+                if (currentFilters.categories.length > 0 && !currentFilters.categories.includes(product.category)) {
+                    return false;
+                }
+                
+                if (product.price > currentFilters.maxPrice) {
+                    return false;
+                }
+                
+                if (currentFilters.sizes.length > 0 && product.sizes) {
+                    const hasSize = currentFilters.sizes.some(size => product.sizes.includes(size));
+                    if (!hasSize) return false;
+                }
+                
+                if (currentFilters.colors.length > 0 && product.colors) {
+                    const hasColor = currentFilters.colors.some(color => product.colors.includes(color));
+                    if (!hasColor) return false;
+                }
+                
+                return true;
+            });
+            
+            applySorting();
+        }
+        
+        function setupSorting() {
+            const sortSelect = document.getElementById('sort-select');
+            sortSelect.addEventListener('change', function() {
+                applySorting();
+            });
+        }
+        
+        function applySorting() {
+            const sortValue = document.getElementById('sort-select').value;
+            
+            switch(sortValue) {
+                case 'price_asc':
+                    filteredProducts.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price_desc':
+                    filteredProducts.sort((a, b) => b.price - a.price);
+                    break;
+                case 'name_asc':
+                    filteredProducts.sort((a, b) => a.name.localeCompare(b.name, 'pl'));
+                    break;
+                case 'name_desc':
+                    filteredProducts.sort((a, b) => b.name.localeCompare(a.name, 'pl'));
+                    break;
+                default:
+                    filteredProducts = filteredProducts.sort((a, b) => a.id - b.id);
+            }
+            
+            displayCatalogProducts(filteredProducts);
+        }
+        
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.btn-add-to-cart')) {
+                const productId = e.target.closest('.btn-add-to-cart').dataset.id;
+                addToCart(productId);
+            }
+        });
+        
+        function addToCart(productId) {
+            const product = allProducts.find(p => p.id == productId);
+            if (product) {
+                alert(`Produkt "${product.name}" został dodany do koszyka!`);
+                updateCartCount();
+            }
+        }
+        
+        function updateCartCount() {
+            const cartCount = document.querySelector('.cart-count');
+            let count = parseInt(cartCount.textContent) || 0;
+            cartCount.textContent = count + 1;
+        }
+    </script>
+</body>
+</html>
